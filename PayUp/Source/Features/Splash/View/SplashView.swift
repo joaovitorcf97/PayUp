@@ -23,6 +23,8 @@ final class SplashView: UIView {
         return imageView
     }()
     
+    let example = AuthenticationView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -36,6 +38,7 @@ final class SplashView: UIView {
         backgroundColor = Colors.backgroundPrimary
         addSubview(triangleImageView)
         addSubview(logoImageView)
+        addSubview(example)
     }
     
     override func layoutSubviews() {
@@ -43,5 +46,13 @@ final class SplashView: UIView {
         triangleImageView.frame = bounds
         logoImageView.center = center
         logoImageView.bounds.size = CGSize(width: 100, height: 100)
+        
+        example.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            example.centerXAnchor.constraint(equalTo: centerXAnchor),
+            example.centerYAnchor.constraint(equalTo: centerYAnchor),
+            example.widthAnchor.constraint(equalToConstant: 343),
+            example.heightAnchor.constraint(equalToConstant: 600),
+        ])
     }
 }
