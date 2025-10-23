@@ -122,4 +122,12 @@ final class InputTextField: UIView {
         
         return result
     }
+    
+    func setText(_ text: String) {
+        self.textField.text = text
+    }
+        
+    func getText() -> String? {
+        return self.textField.text
+    }
 }

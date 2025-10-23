@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class HomeView: UIView {
+    var onTapAddClient: (() -> Void)?
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +116,7 @@ final class HomeView: UIView {
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.addTarget(self, action: #selector(didAddClient), for: .touchUpInside)
         return button
     }()
     
@@ -162,9 +165,9 @@ final class HomeView: UIView {
     }()
     
     private lazy var transactionHeaderStack: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [
-        transactionLabel, UIView(), filterButton,
-       ])
+        let stackView = UIStackView(arrangedSubviews: [
+            transactionLabel, UIView(), filterButton,
+        ])
         stackView.alignment = .center
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -262,5 +265,10 @@ final class HomeView: UIView {
     private func setupPaymentCard() {
         paymentCardView.configure(with: .init(type: .incoming, name: "Teste 01", value: "R$ 200,00"))
         transactionCardView.configure(with: .init(type: .transaction, name: "Teste 02", value: "R$ 100,00"))
+    }
+    
+    @objc
+    private func didAddClient() {
+        onTapAddClient?()
     }
 }
